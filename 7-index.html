@@ -1,25 +1,31 @@
-i<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <!-- Links to stylesheets for various page sections -->
     <link rel="stylesheet" href="styles/4-common.css">
     <link rel="stylesheet" href="styles/3-header.css">
     <link rel="stylesheet" href="styles/3-footer.css">
     <link rel="stylesheet" href="styles/6-filters.css">
     <link rel="stylesheet" href="styles/7-places.css">
+    <!-- Favicon for the page -->
     <link rel="icon" href="images/icon.png" type="image/png">
     <title>AirBnb Clone</title>
   </head>
   <body>
+    <!-- Header section with logo -->
     <header>
       <div class="logo">
+        <!-- Logo goes here -->
       </div>
     </header>
     <div class="container">
+      <!-- Filters section for selecting locations and amenities -->
       <section class="filters">
         <div class="locations">
           <h3>States</h3>
           <h4>California, New York...</h4>
+          <!-- List of locations with nested options -->
           <ul class="popover">
             <li>
               <h2>California:</h2>
@@ -40,14 +46,20 @@ i<!DOCTYPE html>
         <div class="amenities">
           <h3>Amenities</h3>
           <h4>Laundry, Internet...</h4>
+          <!-- List of available amenities -->
           <ul class="popover">
-           
+            <li>Laundry</li>
+            <li>Internet</li>
+            <li>Television</li>
+            <li>Pool</li>
           </ul>
         </div>
+        <!-- Button to perform search with filters -->
         <button>
           Search
         </button>
       </section>
+      <!-- Places section listing different options -->
       <section class="places">
         <h1>Places</h1>
         <article>
@@ -61,6 +73,7 @@ i<!DOCTYPE html>
         </article>
       </section>
     </div>
+    <!-- Footer with attribution -->
     <footer>
       <p>
         Holberton School
