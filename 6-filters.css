@@ -1,4 +1,5 @@
 .filters {
+    /* Basic styling for filter section */
     background-color: white;
     height: 70px;
     width: 100%;
@@ -8,12 +9,13 @@
     align-items: center;
 }
 
-section.filters > button{
+section.filters > button {
+    /* Styling for search button */
     font-size: 18px;
     color: white;
     background-color: #FF5A5F;
     height: 48px;
-    border: 0px;
+    border: 0;
     border-radius: 4px;
     width: 20%;
     margin-left: auto;
@@ -22,30 +24,37 @@ section.filters > button{
 }
 
 section.filters > button:hover {
+    /* Reduce opacity on hover */
     opacity: 0.9;
 }
 
 .locations, .amenities {
+    /* Sizing and padding for locations and amenities */
     height: 100%;
     width: 25%;
     padding-left: 50px;
 }
 
 .locations {
+    /* Right border for locations */
     border-right: 1px solid #DDDDDD;
 }
+
 .locations > h3, .amenities > h3 {
+    /* Header styling */
     font-weight: 600;
     margin: 12px 0 5px 0;
 }
 
 .locations > h4, .amenities > h4 {
+    /* Sub-header styling */
     font-weight: 400;
     font-size: 14px;
     margin: 0 0 5px 0;
 }
 
 .popover {
+    /* Hidden popover styling */
     display: none;
     position: relative;
     left: -51px;
@@ -59,33 +68,40 @@ section.filters > button:hover {
 }
 
 .popover, .popover ul {
+    /* Remove list style */
     list-style-type: none;
 }
-.locations:hover > .popover {
-    display: block;
-}
 
+.locations:hover > .popover,
 .amenities:hover > .popover {
+    /* Display popover on hover */
     display: block;
 }
 
 .popover h2 {
-    margin-top: 0px;
+    /* Header margin in popover */
+    margin-top: 0;
     margin-bottom: 5px;
 }
 
 .locations > .popover > li {
+    /* Margin for location list items */
     margin-bottom: 30px;
     margin-left: 30px;
 }
+
 .locations > .popover > li > ul {
+    /* Padding for nested lists */
     padding-left: 20px;
 }
+
 .locations > .popover > li > ul > li {
+    /* Margin for nested list items */
     margin-bottom: 10px;
 }
 
 .amenities > .popover > li {
+    /* Margin for amenities list items */
     margin-left: 50px;
     margin-bottom: 10px;
 }
