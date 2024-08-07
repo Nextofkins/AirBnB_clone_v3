@@ -78,14 +78,93 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_no_class(self):
         """Test that all returns all rows when no class is passed"""
+        state_data = {"name": "Nairobi"}
+        new_state = state(**state_data)
+        models.storage.save()
+
+        session = models.storage._DBStorage__session
+
+        all_objects = session.querry(State).all()
+
+        self.assertTrue(len(all_objects) > 0)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_new(self):
         """test that new adds an object to the database"""
+        state_data = {"name": "Lagos"}
+        new_state = State(**state_data)
+
+        models.storage.new(new_state)
+
+        session = models.storage._DBStorage__session
+
+        retrieved_state = session.querry(State).filter_by(id=new_state).first()
+
+        self.assertEqual(retrieved_state.id, new_state.id)
+        self.assertEqual(retrieved_state.name, new_state.name)
+        self.assertIsNone(retrieved_state)
+    
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+        state_data = {"name": "Casablanca"}
+        new_state = State(**state_data)
+
+        models.storage.new(new_state)
+        
+        models.storage.save()
+
+        session = models.storage._DBStorage__session
+
+        retrieved_state = session.querry(State).filter_by(id=new_state).first()
+
+        self.assertEqual(retrieved_state.id, new_state.id)
+        self.assertEqual(retrieved_state.name, new_state.name)
+        self.assertIsNone(retrieved_state)
+
+        @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+        def test_get(self):
+            """Test method for obtaining an instance db storage"""
+            storage = models.storage
+
+            storage.reload()
+
+            state_data = {"name": "Maldives"}
+
+            state_isinstance = State(**state_data)
+
+            retrieved_state = storage.get(State, state_instance.id)
+
+            self.assertEqual(state_instance, retrieved_state)
+
+            fake_state_id = storage.get(State, 'fake_id')
+
+            self.assertEqual(fake_state_id, None)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count(self):
+        """Test method for obtaining an instance of db storage."""
+        storage =models.storage
+        storage.reload()
+        state_data = State{"name": "Sudan"}
+        state_instance = State(**state_data)
+        storage.news(state_instance)
+
+        city_data = {"name": "Rocky", "state_id": state_instance.id}
+
+        city_instance = City(**city_data)
+
+        storage.new(city_instance)
+
+        storage.save()
+
+        state_occurence = storage.count(State)
+        self.assertEqaul(state_occurence, len(storage.all(State)))
+
+        all_occurence = storage.count()
+        self.assertEqaul(all_occurence, len(storage.all()))
+
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get_file(self):
@@ -105,3 +184,30 @@ class TestFileStorage(unittest.TestCase):
         result = models.storage.all("State")
         count = models.storage.count("State")
         self.assertEqual(len(result), count)
+
+    def get(self, cls, id):
+        """get:
+        retrieves an object from the file storage by class and id"""
+        if cls and id:
+            if cls in classes.values():
+                all_objects = self.all(cls)
+
+                for value in all_objects.values():
+                    if value.id == id:
+                        return value
+            return
+        return
+    
+    def count(self, cls=None):
+        """count:
+        count the number of objects in storage matching the given class"""
+        if not cls:
+            inst_of_all_cls =self.all()
+            return len(inst_of_all_cls)
+        if cls in classes.values():
+            all_inst_of_prov_cls = self.all(cls)
+            return len(all_inst_of_prov_cls)
+        if cls not in classes.values():
+            return
+    
+
